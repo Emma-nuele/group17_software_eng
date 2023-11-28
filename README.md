@@ -5,6 +5,10 @@ NOTAZIONI
 
 //github è stato semimasterato//
 
+file interfaccia di MOCK-UP: 
+https://1drv.ms/p/s!AmE_rIJC_-60pRS3IpF4DJwaG9Fx?e=zcJ9bA
+
+
 File requisiti modificabile:
 https://1drv.ms/w/s!AmE_rIJC_-60pHxMrk57xG5UF9f9?e=ZITZU6
 
