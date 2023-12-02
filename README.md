@@ -11,7 +11,8 @@ https://1drv.ms/p/s!AmE_rIJC_-60pRS3IpF4DJwaG9Fx?e=zcJ9bA
 class diagram: 
 https://drive.google.com/file/d/16POuUV3MU8xVe4CzRdek4PpPNalZS-iA/view?usp=sharing
 
-
+sequence diagram: 
+https://drive.google.com/file/d/1tCIxN5trUzeOmG1_xMAGmVNt2xSbVWg6/view?usp=sharing
 
 File requisiti modificabile:
 https://1drv.ms/w/s!AmE_rIJC_-60pHxMrk57xG5UF9f9?e=ZITZU6
