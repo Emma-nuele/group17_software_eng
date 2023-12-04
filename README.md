@@ -19,7 +19,8 @@ https://1drv.ms/w/s!AmE_rIJC_-60pHxMrk57xG5UF9f9?e=ZITZU6
 
 link traceability matrix: 
 https://drive.google.com/file/d/1qnWXM4uu0e4meIBPb5v7qMc3Yf3XzLl7/view?usp=sharing
-
+link traceability matrix 2.0:
+https://drive.google.com/file/d/1kls0fXi56H7BwI9vErnKgXDpX_WLyIbg/view?usp=sharing
 
 
 ///////////////////////////////////////////////
