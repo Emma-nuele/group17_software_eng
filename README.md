@@ -19,6 +19,8 @@ https://drive.google.com/file/d/1tCIxN5trUzeOmG1_xMAGmVNt2xSbVWg6/view?usp=shari
 2° sequence diagram: 
 https://drive.google.com/file/d/1Bqmgo-NYnITMDyvvfLSidsj05T5fA1Mn/view?usp=sharing
 
+3° sequence diagram:
+https://drive.google.com/file/d/1zYcxU7yBomzf-XdRyk0JYHLB27Fp0DmC/view?usp=sharing
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 REQUISITI: 
@@ -29,8 +31,8 @@ file interfaccia di MOCK-UP:
 https://1drv.ms/p/s!AmE_rIJC_-60pRS3IpF4DJwaG9Fx?e=zcJ9bA
 ////////////////////////////////////////////////////////////////////////////////////////
 
-link traceability matrix: 
-https://drive.google.com/file/d/1qnWXM4uu0e4meIBPb5v7qMc3Yf3XzLl7/view?usp=sharing
+//link traceability matrix: 
+//https://drive.google.com/file/d/1qnWXM4uu0e4meIBPb5v7qMc3Yf3XzLl7/view?usp=sharing
 
 link traceability matrix 2.0:
 https://drive.google.com/file/d/1kls0fXi56H7BwI9vErnKgXDpX_WLyIbg/view?usp=sharing
