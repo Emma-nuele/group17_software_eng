@@ -5,8 +5,10 @@ NOTAZIONI
 
 //github è stato semimasterato//
 
-file interfaccia di MOCK-UP: 
-https://1drv.ms/p/s!AmE_rIJC_-60pRS3IpF4DJwaG9Fx?e=zcJ9bA
+
+DESIGN: 
+word del design: 
+https://1drv.ms/w/s!AmE_rIJC_-60pk4NgltDylG0Hpba?e=mcwK1v
 
 class diagram: 
 https://drive.google.com/file/d/16POuUV3MU8xVe4CzRdek4PpPNalZS-iA/view?usp=sharing
@@ -17,8 +19,15 @@ https://drive.google.com/file/d/1tCIxN5trUzeOmG1_xMAGmVNt2xSbVWg6/view?usp=shari
 2° sequence diagram: 
 https://drive.google.com/file/d/1Bqmgo-NYnITMDyvvfLSidsj05T5fA1Mn/view?usp=sharing
 
+
+///////////////////////////////////////////////////////////////////////////////////////////
+REQUISITI: 
 File requisiti modificabile:
 https://1drv.ms/w/s!AmE_rIJC_-60pHxMrk57xG5UF9f9?e=ZITZU6
+
+file interfaccia di MOCK-UP: 
+https://1drv.ms/p/s!AmE_rIJC_-60pRS3IpF4DJwaG9Fx?e=zcJ9bA
+////////////////////////////////////////////////////////////////////////////////////////
 
 link traceability matrix: 
 https://drive.google.com/file/d/1qnWXM4uu0e4meIBPb5v7qMc3Yf3XzLl7/view?usp=sharing
