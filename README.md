@@ -30,12 +30,6 @@ https://drive.google.com/file/d/1XEDFWj7nclM8Njwn6qtQb4t433FbAOYd/view?usp=shari
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-
-file interfaccia di MOCK-UP: 
-https://1drv.ms/p/s!AmE_rIJC_-60pRS3IpF4DJwaG9Fx?e=zcJ9bA
-////////////////////////////////////////////////////////////////////////////////////////
-
-
 link traceability matrix 2.0:
 https://drive.google.com/file/d/1kls0fXi56H7BwI9vErnKgXDpX_WLyIbg/view?usp=sharing
 
