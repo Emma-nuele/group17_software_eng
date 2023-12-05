@@ -24,6 +24,10 @@ https://drive.google.com/file/d/1Bqmgo-NYnITMDyvvfLSidsj05T5fA1Mn/view?usp=shari
 3° sequence diagram:
 https://drive.google.com/file/d/1zYcxU7yBomzf-XdRyk0JYHLB27Fp0DmC/view?usp=sharing
 (da aperto ha le modifiche corrette)
+
+4° sequence diagram: 
+https://drive.google.com/file/d/1XEDFWj7nclM8Njwn6qtQb4t433FbAOYd/view?usp=sharing
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 REQUISITI: 
 File requisiti modificabile:
