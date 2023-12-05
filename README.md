@@ -1,4 +1,6 @@
 # group17_software_eng
+AGGIORANRE ALLA FINE USE CASE DIAGRAM
+
 NOTAZIONI
 1. I file di aggiornamento vanno denominati con suffisso 2.0/3.0/...
 2. Inserire i file mettendone il nome in CamelCase con iniziale maiuscola
