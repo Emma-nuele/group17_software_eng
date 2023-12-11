@@ -93,22 +93,22 @@ public class CalculatorViewController {
     }
 
     @FXML
-    private void stackToVar(ActionEvent event, Character var) {
+    private void stackToVar(ActionEvent event) {
         // Logica per trasferire dallo stack alla variabile
     }
 
     @FXML
-    private void varToStack(ActionEvent event, Character var) {
+    private void varToStack(ActionEvent event) {
         // Logica per trasferire dalla variabile allo stack
     }
 
     @FXML
-    private void addToVar(ActionEvent event, Character var) {
+    private void addToVar(ActionEvent event) {
         // Logica per aggiungere al valore della variabile
     }
 
     @FXML
-    private void subToVar(ActionEvent event, Character var) {
+    private void subToVar(ActionEvent event) {
         // Logica per sottrarre dal valore della variabile
  
     }
