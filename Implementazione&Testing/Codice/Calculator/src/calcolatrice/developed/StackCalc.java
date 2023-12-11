@@ -66,11 +66,13 @@ public class StackCalc {
     
     @Override
     public String toString() {
-        //TODO
-        String buffer = "Stack:";
-        for(Number i: stack)
-            buffer = buffer + i.toString();
-        return buffer;
+        StringBuilder buffer = new StringBuilder("");
+    
+        for (Number number : stack) {
+         buffer.append(number.toString()).append(" ");
+        }
+    
+        return buffer.toString();
     }
       
     
