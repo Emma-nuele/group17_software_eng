@@ -59,7 +59,11 @@ public class StackCalc {
     public boolean isFull(){
         return stack.size()== MAX_SIZE;
     }
-
+    
+    public void clear() {
+        stack.clear(); // Rimuove tutti gli elementi dallo stack
+    }
+    
     @Override
     public String toString() {
         //TODO
