@@ -4,10 +4,6 @@
  */
 package calculator.developed;
 
-/**
- *
- * @author emman
- */
 public class Number {
     
     private double re;
