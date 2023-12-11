@@ -6,10 +6,6 @@ package calculator.developed;
 
 import calculator.exceptions.*;
 
-/**
- *
- * @author emman
- */
 public class Operations{
     
     private StackCalc stack;
