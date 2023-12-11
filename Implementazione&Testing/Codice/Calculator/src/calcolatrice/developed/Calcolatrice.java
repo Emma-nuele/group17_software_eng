@@ -14,39 +14,23 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-/**
- *
- * @author emman
- */
 public class Calcolatrice extends Application {
     
-    @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
+ @Override
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("CalculatorView.fxml"));
         
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        Scene scene = new Scene(root);
         
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+    /*  
         StackCalc stack = new StackCalc();
         try{
             //stack.pop();
@@ -67,7 +51,7 @@ public class Calcolatrice extends Application {
         }
 
         System.out.println(stack.toString());
-        
+        */
         
         launch(args);
     }
