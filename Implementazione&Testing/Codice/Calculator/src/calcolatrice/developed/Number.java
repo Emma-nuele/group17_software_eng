@@ -42,7 +42,7 @@ public class Number {
             posIm="+";
         if(re>=0)
             posRe="+";
-        return "\nNumber: " + posRe + re + posIm + im + "j";
+        return posRe + re + posIm + im + "j";
     }
     
     
