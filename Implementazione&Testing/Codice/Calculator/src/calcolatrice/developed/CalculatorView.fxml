@@ -117,6 +117,6 @@
             <Button id="EnterButton" fx:id="EnterButton" layoutX="10.0" layoutY="259.0" mnemonicParsing="false" onAction="#push" prefHeight="150.0" prefWidth="120.0" text="ENTER" />
          </children>
       </VBox>
-      <TextArea id="CalcArea" fx:id="CalcArea" layoutX="14.0" layoutY="14.0" prefHeight="132.0" prefWidth="400.0" />
+      <TextArea id="CalcArea" fx:id="CalcArea" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="132.0" prefWidth="400.0" />
    </children>
 </AnchorPane>
