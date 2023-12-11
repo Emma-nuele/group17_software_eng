@@ -7,10 +7,6 @@ package calculator.developed;
 import calculator.exceptions.FullStackException;
 import calculator.exceptions.InsuffElemStackException;
 
-/**
- *
- * @author Daniele
- */
 public class Commands {
     private StackCalc stack;
     
