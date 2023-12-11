@@ -1,16 +1,40 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package calculator.developed;
 
+import calculator.exceptions.*;
+
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ListView;
 
-public class CalculatorViewController {
+/**
+ *
+ * @author cater
+ */
+public class CalculatorViewController implements Initializable {
+
+    private StackCalc stack;
+    private Operations operations;
+    private Variables variables;
+
+    //prova
+    private String complexNumInProgress = ""; //variabile tiene traccia num complesso utente compone
+
+    @FXML
+    private ListView<String> StackList;
 
     @FXML
     private TextArea calcArea;
@@ -25,71 +49,319 @@ public class CalculatorViewController {
 
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
-        // Logica di inizializzazione qui
+
+        stack = new StackCalc();
+        operations = new Operations(stack);
+        variables = new Variables(stack);
+
+        StackList.getItems().clear();
+
+        calcArea.setText("Nessun elemento nello stack.");
     }
 
     @FXML
     private void quitApp(ActionEvent event) {
-         Platform.exit();
+        Platform.exit();
     }
 
     @FXML
     private void swap(ActionEvent event) {
-        // Logica per SWAP
+        if (stack != null) {
+            try {
+                if (stack.leastTwo()) {
+                    Number topElement = stack.pop();
+                    Number secondElement = stack.pop();
+                    stack.push(topElement);
+                    stack.push(secondElement);
+                    updateDisplay();
+                } else {
+                    System.out.println("Impossibile eseguire il comando SWAP, ci devono essere almeno due elementi nello stack.");
+                }
+            } catch (InsuffElemStackException e) {
+                System.out.println(e.getMessage());
+            } catch (FullStackException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            System.out.println("Lo stack non è stato inizializzato.");
+        }
     }
-    @FXML
-    private void over (ActionEvent event){
-        //Logica per over
-    }
-    @FXML
-     private void clear (ActionEvent event){
-     }
-    @FXML
-     private void drop (ActionEvent event){
-        //logica per drop
-     }
-    @FXML
-     private void dup (ActionEvent event){
-        //logica per dup
-     }
 
     @FXML
+    private void over(ActionEvent event) {
+        if (stack != null) {
+            try {
+                if (stack.leastTwo()) {
+                    Number topElement = stack.pop();
+                    Number secondElement = stack.top();
+                    stack.push(topElement);
+                    stack.push(secondElement);
+                    updateDisplay();
+                } else {
+                    System.out.println("Impossibile eseguire il comando OVER, ci devono essere almeno due elementi nello stack.");
+                }
+            } catch (InsuffElemStackException e) {
+                System.out.println(e.getMessage());
+            } catch (FullStackException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            System.out.println("Lo stack non è stato inizializzato.");
+        }
+    }
+
+    @FXML
+    private void clear(ActionEvent event) {
+        if (stack != null) {
+
+            stack.getStack().clear();
+            StackList.getItems().clear(); // Rimuovi elem da ListView
+
+            complexNumInProgress = ""; //reset stringa in composizione
+
+            if (calcArea != null) { //Aggiorna calcArea
+                calcArea.setText(""); // reset
+            }
+        } else {
+            System.out.println("Lo stack non è stato inizializzato.");
+        }
+    }
+
+    @FXML
+    private void drop(ActionEvent event) {
+        if (stack != null) {
+            try {
+                stack.pop();
+                updateDisplay();
+            } catch (InsuffElemStackException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            System.out.println("Lo stack non è stato inizializzato.");
+        }
+    }
+
+    @FXML
+    private void dup(ActionEvent event) {
+        if (stack != null) {
+            try {
+                if (stack.leastOne()) {
+                    Number topElement = stack.top();
+                    stack.push(new Number(topElement.getRe(), topElement.getIm()));
+                    updateDisplay();
+                } else {
+                    System.out.println("Impossibile eseguire il comando DUP, non ci sono elementi nello stack.");
+                }
+            } catch (FullStackException e) {
+                System.out.println(e.getMessage());
+            } catch (InsuffElemStackException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            System.out.println("Lo stack non è stato inizializzato.");
+        }
+    }
+
+//PROVA
+    @FXML
     private void handleInput(ActionEvent event) {
-        // Logica per gestire l'input generico (pulsanti numerici, ecc.)
+        if (stack != null) {
+            Button buttonClicked = (Button) event.getSource();
+            String inputText = buttonClicked.getText();
+
+            // Concatena l'input 
+            complexNumInProgress += inputText;
+
+            if (calcArea != null) {
+                calcArea.setText(complexNumInProgress);
+            }
+        } else {
+            System.out.println("Lo stack non è stato inizializzato.");
+        }
+
     }
 
     @FXML
     private void sum(ActionEvent event) {
-        // Logica per la somma
+        try {
+            if (stack != null && operations != null) {
+                operations.sum();
+                StackList.getItems().clear();
+                for (Number item : stack.getStack()) {
+                    StackList.getItems().add(item.toString());
+                }
+                if (calcArea != null && stack.leastOne()) {
+                    calcArea.setText(stack.top().toString());
+                } else {
+                    calcArea.setText("Lo stack è vuoto.");
+                }
+            } else {
+                System.out.println("Lo stack o le operations non sono stati inizializzati.");
+            }
+        } catch (InsuffElemStackException | FullStackException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
     private void sub(ActionEvent event) {
-        // Logica per la sottrazione
-    }
-    @FXML
-    private void division(ActionEvent event) {
-        // Logica per la divisione
+        try {
+            if (stack != null && operations != null) {
+                operations.sub();
+                StackList.getItems().clear(); // Pulisce gli elementi correnti
+                for (Number item : stack.getStack()) {
+                    StackList.getItems().add(item.toString());
+                }
+                if (calcArea != null && stack.leastOne()) {
+                    calcArea.setText(stack.top().toString());
+                } else {
+                    calcArea.setText("Lo stack è vuoto.");
+                }
+            } else {
+                System.out.println("Lo stack o le operations non sono stati inizializzati.");
+            }
+        } catch (InsuffElemStackException | FullStackException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-      @FXML
+    @FXML
+    private void division(ActionEvent event) {
+        try {
+            if (stack != null && operations != null) {
+                operations.division();
+                StackList.getItems().clear(); // Pulisce gli elementi correnti
+                for (Number item : stack.getStack()) {
+                    StackList.getItems().add(item.toString());
+                }
+                if (calcArea != null && stack.leastOne()) {
+                    calcArea.setText(stack.top().toString());
+                } else {
+                    calcArea.setText("Lo stack è vuoto.");
+                }
+            } else {
+                System.out.println("Lo stack o le operations non sono stati inizializzati.");
+            }
+        } catch (InsuffElemStackException | FullStackException | DivisionZeroException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML
     private void multiplication(ActionEvent event) {
-        // Logica per la moltiplicazione
+        try {
+            if (stack != null && operations != null) {
+                operations.multiplication();
+                StackList.getItems().clear(); // Pulisce gli elementi correnti
+                for (Number item : stack.getStack()) {
+                    StackList.getItems().add(item.toString());
+                }
+                if (calcArea != null && stack.leastOne()) {
+                    calcArea.setText(stack.top().toString());
+                } else {
+                    calcArea.setText("Lo stack è vuoto.");
+                }
+            } else {
+                System.out.println("Lo stack o le operations non sono stati inizializzati.");
+            }
+        } catch (InsuffElemStackException | FullStackException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
     private void sqrt(ActionEvent event) {
-        // Logica per il calcolo della radice quadrata
+        if (stack != null) {
+            try {
+                if (stack.leastOne()) {
+                    Number topElement = stack.pop();
+                    double re = Math.sqrt(topElement.getRe()); // rad re
+                    double im = Math.sqrt(topElement.getIm()); // rad im
+                    stack.push(new Number(re, im));
+                    updateDisplay();
+                } else {
+                    System.out.println("Impossibile eseguire il comando SQRT, non ci sono elementi nello stack.");
+                }
+            } catch (InsuffElemStackException e) {
+                System.out.println(e.getMessage());
+            } catch (FullStackException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            System.out.println("Lo stack non è stato inizializzato.");
+        }
     }
 
     @FXML
     private void signReversal(ActionEvent event) {
-        // Logica per l'inversione del segno
+        if (stack != null) {
+            try {
+                if (stack.leastOne()) {
+                    Number topElement = stack.pop();
+                    double re = -topElement.getRe(); // Inverti il segno della parte reale
+                    double im = -topElement.getIm(); // Inverti il segno della parte immaginaria
+                    stack.push(new Number(re, im));
+                    updateDisplay();
+                } else {
+                    System.out.println("Impossibile eseguire l'inversione del segno, non ci sono elementi nello stack.");
+                }
+            } catch (InsuffElemStackException e) {
+                System.out.println(e.getMessage());
+            } catch (FullStackException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            System.out.println("Lo stack non è stato inizializzato.");
+        }
     }
 
     @FXML
     private void push(ActionEvent event) {
-        // Logica per PUSH
+        //TODO
+        if (!complexNumInProgress.isEmpty()) {
+            try {
+                ///Split
+                String[] parts = complexNumInProgress.split("\\+|j");
+                double realPart = 0.;
+                double imaginaryPart = 0;
+
+                if (parts.length > 0 && !parts[0].isEmpty()) {
+                    String realPartStr = parts[0];
+                    if (realPartStr.contains("+")) {
+                        realPart = Double.parseDouble(realPartStr.split("\\+")[0]);
+                    } else if (realPartStr.contains("-")) {
+                        realPart = Double.parseDouble(realPartStr.split("-")[0]);
+                    } else {
+                        realPart = Double.parseDouble(realPartStr);
+                    }
+                }
+
+                if (parts.length > 1 && !parts[1].isEmpty()) {
+                    imaginaryPart = Double.parseDouble(parts[1]);
+                }
+
+                //Nuovo
+                Number number = new Number(realPart, imaginaryPart);
+                stack.push(number);
+
+                //Reset
+                complexNumInProgress = "";
+                calcArea.setText("");
+                updateDisplay();
+
+            } catch (NumberFormatException e) {
+                calcArea.setText("Formato numero non valido: " + e.getMessage());
+            } catch (FullStackException e) {
+                calcArea.setText("Stack pieno: " + e.getMessage());
+            }
+        }
+    }
+
+    private void updateDisplay() {
+        StackList.getItems().clear();
+        for (Number item : stack.getStack()) {
+            StackList.getItems().add(item.toString());
+        }
     }
 
     @FXML
@@ -110,12 +382,14 @@ public class CalculatorViewController {
     @FXML
     private void subToVar(ActionEvent event) {
         // Logica per sottrarre dal valore della variabile
- 
+
     }
+
     @FXML
     private void handleComboBoxAction(ActionEvent event) {
         // Logica per gestire gli eventi della ComboBox
-        // Puoi ottenere l'elemento selezionato dalla ComboBox usando comboBoxVariables.getValue()
+       
     }
 
 }
+
