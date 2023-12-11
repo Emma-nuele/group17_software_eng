@@ -36,10 +36,10 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button id="button&gt;x" fx:id="ButtonMajorX" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#variToStack" prefHeight="55.0" prefWidth="55.0" text="&gt;x" />
-                        <Button id="Button&lt;x" fx:id="ButtonMinorX" layoutX="10.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#stackToVari" prefHeight="55.0" prefWidth="55.0" text="&lt;x" GridPane.columnIndex="1" />
-                        <Button id="button+x" fx:id="ButtonPlusX" layoutX="10.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addToVari" prefHeight="55.0" prefWidth="55.0" text="+x" GridPane.rowIndex="1" />
-                        <Button id="button-x" fx:id="ButtonLessX" layoutX="10.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#subToVari" prefHeight="55.0" prefWidth="55.0" text="-x" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button id="button&gt;x" fx:id="ButtonMajorX" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#varToStack" prefHeight="55.0" prefWidth="55.0" text="&gt;x" />
+                        <Button id="Button&lt;x" fx:id="ButtonMinorX" layoutX="10.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#stackToVar" prefHeight="55.0" prefWidth="55.0" text="&lt;x" GridPane.columnIndex="1" />
+                        <Button id="button+x" fx:id="ButtonPlusX" layoutX="10.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addToVar" prefHeight="55.0" prefWidth="55.0" text="+x" GridPane.rowIndex="1" />
+                        <Button id="button-x" fx:id="ButtonLessX" layoutX="10.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#subToVar" prefHeight="55.0" prefWidth="55.0" text="-x" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
@@ -117,6 +117,6 @@
             <Button id="EnterButton" fx:id="EnterButton" layoutX="10.0" layoutY="259.0" mnemonicParsing="false" onAction="#push" prefHeight="150.0" prefWidth="120.0" text="ENTER" />
          </children>
       </VBox>
-      <TextArea id="CalcArea" fx:id="CalcArea" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="132.0" prefWidth="400.0" />
+      <TextArea id="CalcArea" fx:id="CalcArea" layoutX="14.0" layoutY="14.0" prefHeight="132.0" prefWidth="400.0" />
    </children>
 </AnchorPane>
