@@ -2,12 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Exception.java to edit this template
  */
-package calcolatrice.exceptions;
+package calculator.exceptions;
 
-/**
- *
- * @author emman
- */
 public class DivisionZeroException extends CalcExceptions{
 
     /**
