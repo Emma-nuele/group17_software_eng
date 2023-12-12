@@ -60,10 +60,6 @@ public class StackCalc {
         return stack.size()== MAX_SIZE;
     }
     
-    public void clear() {
-        stack.clear(); // Rimuove tutti gli elementi dallo stack
-    }
-    
     @Override
     public String toString() {
         StringBuilder buffer = new StringBuilder("");
