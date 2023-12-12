@@ -20,18 +20,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ListView;
 
-/**
- *
- * @author cater
- */
 public class CalculatorViewController implements Initializable {
 
     private StackCalc stack;
     private Operations operations;
     private Variables variables;
+    private Commands commands;
 
-    //prova
-    private String complexNumInProgress = ""; //variabile tiene traccia num complesso utente compone
+    // prova
+    private String complexNumInProgress = ""; // variabile tiene traccia num complesso utente compone
 
     @FXML
     private ListView<String> StackList;
@@ -41,7 +38,8 @@ public class CalculatorViewController implements Initializable {
     @FXML
     private Button DropButton, DupButton, SwapButton, OverButton, ClearButton, EnterButton;
     @FXML
-    private Button Button7, Button8, Button9, Button4, Button5, Button6, Button1, Button2, Button3, Button0, ButtonPoint;
+    private Button Button7, Button8, Button9, Button4, Button5, Button6, Button1, Button2, Button3, Button0,
+            ButtonPoint;
     @FXML
     private Button ButtonPlus, ButtonLess, ButtonMultiplier, ButtonSlash, RadButton, PlusLessButton, ArrowLeftButton;
     @FXML
@@ -53,6 +51,7 @@ public class CalculatorViewController implements Initializable {
         stack = new StackCalc();
         operations = new Operations(stack);
         variables = new Variables(stack);
+        commands = new Commands(stack);
 
         StackList.getItems().clear();
 
@@ -68,19 +67,12 @@ public class CalculatorViewController implements Initializable {
     private void swap(ActionEvent event) {
         if (stack != null) {
             try {
-                if (stack.leastTwo()) {
-                    Number topElement = stack.pop();
-                    Number secondElement = stack.pop();
-                    stack.push(topElement);
-                    stack.push(secondElement);
-                    updateDisplay();
-                } else {
-                    System.out.println("Impossibile eseguire il comando SWAP, ci devono essere almeno due elementi nello stack.");
-                }
+                commands.swap();
+                updateDisplay();
             } catch (InsuffElemStackException e) {
-                System.out.println(e.getMessage());
+                System.out.println("Errore: " + e.getMessage());
             } catch (FullStackException e) {
-                System.out.println(e.getMessage());
+                System.out.println("Errore: " + e.getMessage());
             }
         } else {
             System.out.println("Lo stack non è stato inizializzato.");
@@ -91,19 +83,12 @@ public class CalculatorViewController implements Initializable {
     private void over(ActionEvent event) {
         if (stack != null) {
             try {
-                if (stack.leastTwo()) {
-                    Number topElement = stack.pop();
-                    Number secondElement = stack.top();
-                    stack.push(topElement);
-                    stack.push(secondElement);
-                    updateDisplay();
-                } else {
-                    System.out.println("Impossibile eseguire il comando OVER, ci devono essere almeno due elementi nello stack.");
-                }
+                commands.over();
+                updateDisplay();
             } catch (InsuffElemStackException e) {
-                System.out.println(e.getMessage());
+                System.out.println("Errore: " + e.getMessage());
             } catch (FullStackException e) {
-                System.out.println(e.getMessage());
+                System.out.println("Errore: " + e.getMessage());
             }
         } else {
             System.out.println("Lo stack non è stato inizializzato.");
@@ -114,12 +99,12 @@ public class CalculatorViewController implements Initializable {
     private void clear(ActionEvent event) {
         if (stack != null) {
 
-            stack.getStack().clear();
+            commands.clear();
             StackList.getItems().clear(); // Rimuovi elem da ListView
 
-            complexNumInProgress = ""; //reset stringa in composizione
+            complexNumInProgress = ""; // reset stringa in composizione
 
-            if (calcArea != null) { //Aggiorna calcArea
+            if (calcArea != null) { // Aggiorna calcArea
                 calcArea.setText(""); // reset
             }
         } else {
@@ -131,7 +116,7 @@ public class CalculatorViewController implements Initializable {
     private void drop(ActionEvent event) {
         if (stack != null) {
             try {
-                stack.pop();
+                commands.drop();
                 updateDisplay();
             } catch (InsuffElemStackException e) {
                 System.out.println(e.getMessage());
@@ -145,31 +130,28 @@ public class CalculatorViewController implements Initializable {
     private void dup(ActionEvent event) {
         if (stack != null) {
             try {
-                if (stack.leastOne()) {
-                    Number topElement = stack.top();
-                    stack.push(new Number(topElement.getRe(), topElement.getIm()));
-                    updateDisplay();
-                } else {
-                    System.out.println("Impossibile eseguire il comando DUP, non ci sono elementi nello stack.");
-                }
+                commands.dup();
+                updateDisplay();
             } catch (FullStackException e) {
-                System.out.println(e.getMessage());
+
+                System.out.println("Errore: " + e.getMessage());
             } catch (InsuffElemStackException e) {
-                System.out.println(e.getMessage());
+
+                System.out.println("Errore: " + e.getMessage());
             }
         } else {
             System.out.println("Lo stack non è stato inizializzato.");
         }
     }
 
-//PROVA
+    // PROVA
     @FXML
     private void handleInput(ActionEvent event) {
         if (stack != null) {
             Button buttonClicked = (Button) event.getSource();
             String inputText = buttonClicked.getText();
 
-            // Concatena l'input 
+            // Concatena l'input
             complexNumInProgress += inputText;
 
             if (calcArea != null) {
@@ -274,10 +256,7 @@ public class CalculatorViewController implements Initializable {
         if (stack != null) {
             try {
                 if (stack.leastOne()) {
-                    Number topElement = stack.pop();
-                    double re = Math.sqrt(topElement.getRe()); // rad re
-                    double im = Math.sqrt(topElement.getIm()); // rad im
-                    stack.push(new Number(re, im));
+                    operations.sqrt();
                     updateDisplay();
                 } else {
                     System.out.println("Impossibile eseguire il comando SQRT, non ci sono elementi nello stack.");
@@ -297,13 +276,11 @@ public class CalculatorViewController implements Initializable {
         if (stack != null) {
             try {
                 if (stack.leastOne()) {
-                    Number topElement = stack.pop();
-                    double re = -topElement.getRe(); // Inverti il segno della parte reale
-                    double im = -topElement.getIm(); // Inverti il segno della parte immaginaria
-                    stack.push(new Number(re, im));
+                    operations.signReversal();
                     updateDisplay();
                 } else {
-                    System.out.println("Impossibile eseguire l'inversione del segno, non ci sono elementi nello stack.");
+                    System.out
+                            .println("Impossibile eseguire l'inversione del segno, non ci sono elementi nello stack.");
                 }
             } catch (InsuffElemStackException e) {
                 System.out.println(e.getMessage());
@@ -317,10 +294,10 @@ public class CalculatorViewController implements Initializable {
 
     @FXML
     private void push(ActionEvent event) {
-        //TODO
+        // TODO
         if (!complexNumInProgress.isEmpty()) {
             try {
-                ///Split
+                /// Split
                 String[] parts = complexNumInProgress.split("\\+|j");
                 double realPart = 0.;
                 double imaginaryPart = 0;
@@ -340,11 +317,11 @@ public class CalculatorViewController implements Initializable {
                     imaginaryPart = Double.parseDouble(parts[1]);
                 }
 
-                //Nuovo
+                // Nuovo
                 Number number = new Number(realPart, imaginaryPart);
                 stack.push(number);
 
-                //Reset
+                // Reset
                 complexNumInProgress = "";
                 calcArea.setText("");
                 updateDisplay();
@@ -388,8 +365,7 @@ public class CalculatorViewController implements Initializable {
     @FXML
     private void handleComboBoxAction(ActionEvent event) {
         // Logica per gestire gli eventi della ComboBox
-       
+
     }
 
 }
-
