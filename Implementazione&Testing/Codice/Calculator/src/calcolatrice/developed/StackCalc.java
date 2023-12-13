@@ -1,9 +1,14 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package calculator.developed;
 
+/**
+ *
+ * @author cater
+ */
 import calculator.exceptions.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -11,7 +16,7 @@ import java.util.Deque;
 
 public class StackCalc {
     
-    private static Deque<Number> stack;
+    private Deque<Number> stack;
     private final int MAX_SIZE=100;
     
     public StackCalc(){
@@ -19,8 +24,8 @@ public class StackCalc {
     }
 
     //Rimuovi?
-    public StackCalc getStack(){
-        return this;
+    public Deque<Number> getStack() {
+        return stack;
     } 
 
     public void setStack(Deque s){
@@ -59,7 +64,7 @@ public class StackCalc {
     public boolean isFull(){
         return stack.size()== MAX_SIZE;
     }
-    
+
     @Override
     public String toString() {
         StringBuilder buffer = new StringBuilder("");
@@ -70,6 +75,5 @@ public class StackCalc {
     
         return buffer.toString();
     }
-      
-    
+
 }
