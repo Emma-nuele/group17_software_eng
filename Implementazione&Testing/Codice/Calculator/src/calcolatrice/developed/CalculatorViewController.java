@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package calculator.developed;
 
 import calculator.exceptions.*;
 
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,14 +20,14 @@ public class CalculatorViewController implements Initializable {
     private Variables variables;
     private Commands commands;
 
-    // prova
     private String complexNumInProgress = ""; // variabile tiene traccia num complesso utente compone
 
     @FXML
     private ListView<String> StackList;
-
     @FXML
     private TextArea calcArea;
+    @FXML
+    private ListView<String> VariableList; //Aggiunta - (fxid già impostato)
     @FXML
     private Button DropButton, DupButton, SwapButton, OverButton, ClearButton, EnterButton;
     @FXML
@@ -45,7 +38,7 @@ public class CalculatorViewController implements Initializable {
     @FXML
     private ComboBox<String> comboBoxVariables;
 
-    @FXML
+    @Override //Aggiunta
     public void initialize(URL url, ResourceBundle rb) {
 
         stack = new StackCalc();
@@ -53,13 +46,13 @@ public class CalculatorViewController implements Initializable {
         variables = new Variables(stack);
         commands = new Commands(stack);
 
-        StackList.getItems().clear();
+        StackList.getItems().clear(); //Cancella per sicurezza
 
         calcArea.setText("Nessun elemento nello stack.");
     }
 
     @FXML
-    private void quitApp(ActionEvent event) {
+    private void quitApp(ActionEvent event) { //Da fare su scene builder
         Platform.exit();
     }
 
@@ -96,16 +89,16 @@ public class CalculatorViewController implements Initializable {
     }
 
     @FXML
-    private void clear(ActionEvent event) {
+    private void clear(ActionEvent event) throws InsuffElemStackException {
         if (stack != null) {
 
             commands.clear();
-            StackList.getItems().clear(); // Rimuovi elem da ListView
+            StackList.getItems().clear(); // Rimuovi elem da ListView (getItems() -> prende tutti oggetti dalla lista)
 
             complexNumInProgress = ""; // reset stringa in composizione
 
             if (calcArea != null) { // Aggiorna calcArea
-                calcArea.setText(""); // reset
+                calcArea.setText(""); //reset
             }
         } else {
             System.out.println("Lo stack non è stato inizializzato.");
@@ -144,7 +137,8 @@ public class CalculatorViewController implements Initializable {
         }
     }
 
-    // PROVA
+    // Da completare
+    //cancellare (tornare di un digit indietro)
     @FXML
     private void handleInput(ActionEvent event) {
         if (stack != null) {
@@ -160,17 +154,18 @@ public class CalculatorViewController implements Initializable {
         } else {
             System.out.println("Lo stack non è stato inizializzato.");
         }
-
     }
 
-    @FXML
+ 
+
+      @FXML
     private void sum(ActionEvent event) {
         try {
-            if (stack != null && operations != null) {
+            if (stack != null && operations != null) { //Controllo su null 
                 operations.sum();
-                StackList.getItems().clear();
+                StackList.getItems().clear(); 
                 for (Number item : stack.getStack()) {
-                    StackList.getItems().add(item.toString());
+                    StackList.getItems().add(0, item.toString()); //Aggiunta - inserimento visuale in top position (VoperazioneBinaria)
                 }
                 if (calcArea != null && stack.leastOne()) {
                     calcArea.setText(stack.top().toString());
@@ -184,7 +179,7 @@ public class CalculatorViewController implements Initializable {
             System.out.println(e.getMessage());
         }
     }
-
+     
     @FXML
     private void sub(ActionEvent event) {
         try {
@@ -192,7 +187,7 @@ public class CalculatorViewController implements Initializable {
                 operations.sub();
                 StackList.getItems().clear(); // Pulisce gli elementi correnti
                 for (Number item : stack.getStack()) {
-                    StackList.getItems().add(item.toString());
+                    StackList.getItems().add(0, item.toString());
                 }
                 if (calcArea != null && stack.leastOne()) {
                     calcArea.setText(stack.top().toString());
@@ -214,7 +209,7 @@ public class CalculatorViewController implements Initializable {
                 operations.division();
                 StackList.getItems().clear(); // Pulisce gli elementi correnti
                 for (Number item : stack.getStack()) {
-                    StackList.getItems().add(item.toString());
+                    StackList.getItems().add(0, item.toString());
                 }
                 if (calcArea != null && stack.leastOne()) {
                     calcArea.setText(stack.top().toString());
@@ -236,7 +231,7 @@ public class CalculatorViewController implements Initializable {
                 operations.multiplication();
                 StackList.getItems().clear(); // Pulisce gli elementi correnti
                 for (Number item : stack.getStack()) {
-                    StackList.getItems().add(item.toString());
+                    StackList.getItems().add(0, item.toString());
                 }
                 if (calcArea != null && stack.leastOne()) {
                     calcArea.setText(stack.top().toString());
@@ -271,6 +266,7 @@ public class CalculatorViewController implements Initializable {
         }
     }
 
+    //non funziona
     @FXML
     private void signReversal(ActionEvent event) {
         if (stack != null) {
@@ -292,14 +288,15 @@ public class CalculatorViewController implements Initializable {
         }
     }
 
+    //prob sbaglia stampa signReverse
     @FXML
     private void push(ActionEvent event) {
         // TODO
         if (!complexNumInProgress.isEmpty()) {
             try {
                 /// Split
-                String[] parts = complexNumInProgress.split("\\+|j");
-                double realPart = 0.;
+                String[] parts = complexNumInProgress.split("\\+\\-|j"); //aggiunta \\-
+                double realPart = 0;
                 double imaginaryPart = 0;
 
                 if (parts.length > 0 && !parts[0].isEmpty()) {
@@ -334,10 +331,10 @@ public class CalculatorViewController implements Initializable {
         }
     }
 
-    private void updateDisplay() {
+    private void updateDisplay() { 
         StackList.getItems().clear();
         for (Number item : stack.getStack()) {
-            StackList.getItems().add(item.toString());
+            StackList.getItems().add(0, item.toString());
         }
     }
 
