@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="PrincipalPanel" fx:id="PrincipalPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.developed.CalculatorViewController">
+<AnchorPane id="PrincipalPanel" fx:id="PrincipalPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.developed.CalculatorViewController">
    <children>
       <SplitPane id="SplitPanel" fx:id="SplitPanel" dividerPositions="0.5052631578947369" layoutX="546.0" prefHeight="502.0" prefWidth="250.0">
         <items>
@@ -98,7 +98,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button id="ArrowToLeftButton" fx:id="ArrowLeftButton" mnemonicParsing="false" onAction="#handleInput" prefHeight="64.5" prefWidth="201.0" text="↩" GridPane.columnIndex="2">
+            <Button id="ArrowToLeftButton" fx:id="ArrowLeftButton" mnemonicParsing="false" onAction="#delete" prefHeight="64.5" prefWidth="201.0" text="↩" GridPane.columnIndex="2">
                <font>
                   <Font size="19.0" />
                </font>
@@ -117,6 +117,6 @@
             <Button id="EnterButton" fx:id="EnterButton" layoutX="10.0" layoutY="259.0" mnemonicParsing="false" onAction="#push" prefHeight="150.0" prefWidth="120.0" text="ENTER" />
          </children>
       </VBox>
-      <TextArea id="CalcArea" fx:id="CalcArea" layoutX="14.0" layoutY="14.0" prefHeight="132.0" prefWidth="400.0" />
+      <TextArea id="calcArea" fx:id="calcArea" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="132.0" prefWidth="400.0" />
    </children>
 </AnchorPane>
