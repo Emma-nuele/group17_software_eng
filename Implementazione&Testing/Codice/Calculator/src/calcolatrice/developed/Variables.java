@@ -40,7 +40,7 @@ public class Variables {
         Number elem = map.get(var);
         
         if(elem == null)
-            throw new UnusedVarException("Variabile non contiene valore");
+            throw new UnusedVarException("La variabile " + var + " non contiene valore");
         
         stack.push(elem);
     }
@@ -54,7 +54,7 @@ public class Variables {
         Number incremento = stack.pop();
         
         if(ultimo == null)
-            throw new UnusedVarException("Variabile non contiene valore");
+            throw new UnusedVarException("La variabile " + var + " non contiene valore");
         
 
         Number risultato = new Number( ultimo.getRe() + incremento.getRe(), ultimo.getIm() + incremento.getIm());
@@ -72,7 +72,7 @@ public class Variables {
         
         
         if(ultimo == null)
-            throw new UnusedVarException("Variabile non contiene valore");
+            throw new UnusedVarException("La variabile " + var + " non contiene valore");
         
         Number risultato = new Number( ultimo.getRe() - decremento.getRe(), ultimo.getIm() - decremento.getIm());
        
