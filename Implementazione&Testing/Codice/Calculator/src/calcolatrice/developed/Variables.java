@@ -32,34 +32,47 @@ public class Variables {
         map.put(var, stack.pop());
     }
 
-    public void varToStack(Character var) throws FullStackException, InvalidArgException{
+    public void varToStack(Character var) throws FullStackException, InvalidArgException, UnusedVarException{
+
+        if(var == null)
+            throw new InvalidArgException("Seleziona prima una variabile");
+        
+        Number elem = map.get(var);
+        
+        if(elem == null)
+            throw new UnusedVarException("Variabile non contiene valore");
+        
+        stack.push(elem);
+    }
+
+    public void addToVar(Character var)throws FullStackException,InsuffElemStackException, InvalidArgException, UnusedVarException{
         
         if(var == null)
             throw new InvalidArgException("Seleziona prima una variabile");
-        stack.push(map.get(var));
-    }
-
-    public void addToVar(Character var)throws FullStackException,InsuffElemStackException, InvalidArgException{
-        
         
         Number ultimo = map.get(var);
         Number incremento = stack.pop();
         
-        if(var == null)
-            throw new InvalidArgException("Seleziona prima una variabile");
+        if(ultimo == null)
+            throw new UnusedVarException("Variabile non contiene valore");
         
+
         Number risultato = new Number( ultimo.getRe() + incremento.getRe(), ultimo.getIm() + incremento.getIm());
        
         map.put(var, risultato);
     }
  
-    public void subToVar(Character var)throws FullStackException,InsuffElemStackException, InvalidArgException{
+    public void subToVar(Character var)throws FullStackException,InsuffElemStackException, InvalidArgException, UnusedVarException{
+        
+        if(var == null)
+            throw new InvalidArgException("Seleziona prima una variabile");
         
         Number ultimo = map.get(var);
         Number decremento = stack.pop();
         
-        if(var == null)
-            throw new InvalidArgException("Seleziona prima una variabile");
+        
+        if(ultimo == null)
+            throw new UnusedVarException("Variabile non contiene valore");
         
         Number risultato = new Number( ultimo.getRe() - decremento.getRe(), ultimo.getIm() - decremento.getIm());
        
