@@ -23,7 +23,7 @@ public class Operations {
     public void sum() throws InsuffElemStackException, FullStackException {
 
         if (!stack.leastTwo()) {
-            throw new InsuffElemStackException("Impossibile eseguire comando, non ci sono abbastanza elementi nello stack");
+            throw new InsuffElemStackException("Non ci sono abbastanza elementi nello stack");
         }
 
         Number ultimo = stack.pop();
@@ -38,7 +38,7 @@ public class Operations {
     public void sub() throws InsuffElemStackException, FullStackException {
 
         if (!stack.leastTwo()) {
-            throw new InsuffElemStackException("Impossibile eseguire comando, non ci sono abbasatnza elementi nello stack");
+            throw new InsuffElemStackException("Non ci sono abbasatnza elementi nello stack");
         }
 
         Number ultimo = stack.pop();
@@ -53,7 +53,7 @@ public class Operations {
     public void multiplication() throws InsuffElemStackException, FullStackException {
 
         if (!stack.leastTwo()) {
-            throw new InsuffElemStackException("Impossibile eseguire comando, non ci sono abbasatnza elementi nello stack");
+            throw new InsuffElemStackException("Non ci sono abbasatnza elementi nello stack");
         }
 
         Number ultimo = stack.pop();
@@ -70,7 +70,7 @@ public class Operations {
     public void division() throws DivisionZeroException, InsuffElemStackException, FullStackException {
 
         if (!stack.leastTwo()) {
-            throw new InsuffElemStackException("Impossibile eseguire comando, non ci sono abbasatnza elementi nello stack");
+            throw new InsuffElemStackException("Non ci sono abbasatnza elementi nello stack");
         }
 
         Number ultimo = stack.pop();
@@ -82,7 +82,7 @@ public class Operations {
         double d = ultimo.getIm();
 
         if ((c == 0 && d == 0)) {
-            throw new DivisionZeroException("\nImpossibile dividere per zero");
+            throw new DivisionZeroException("Impossibile dividere per zero");
         }
 
         double risultatoRe = this.round(((a * c) + (b * d)) / ((c * c) + (d * d)));
