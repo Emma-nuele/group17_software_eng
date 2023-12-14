@@ -27,7 +27,7 @@ public class Operations {
         Number ultimo = stack.pop();
         Number penultimo = stack.pop();
 
-        Number risultato = new Number(ultimo.getRe() + penultimo.getRe(), ultimo.getIm() + penultimo.getIm());
+        Number risultato = new Number(this.round(ultimo.getRe() + penultimo.getRe()), this.round(ultimo.getIm() + penultimo.getIm()));
 
         stack.push(risultato);
 
@@ -42,7 +42,7 @@ public class Operations {
         Number ultimo = stack.pop();
         Number penultimo = stack.pop();
 
-        Number risultato = new Number(penultimo.getRe() - ultimo.getRe(), penultimo.getIm() - ultimo.getIm());
+        Number risultato = new Number(this.round(penultimo.getRe() - ultimo.getRe()), this.round(penultimo.getIm() - ultimo.getIm()));
 
         stack.push(risultato);
 
@@ -57,8 +57,8 @@ public class Operations {
         Number ultimo = stack.pop();
         Number penultimo = stack.pop();
 
-        double risultatoRe = (penultimo.getRe() * ultimo.getRe()) - (ultimo.getIm() * penultimo.getIm());
-        double risultatoIm = (penultimo.getRe() * ultimo.getIm()) + (ultimo.getRe() * penultimo.getIm());
+        double risultatoRe = this.round((penultimo.getRe() * ultimo.getRe()) - (ultimo.getIm() * penultimo.getIm()));
+        double risultatoIm = this.round((penultimo.getRe() * ultimo.getIm()) + (ultimo.getRe() * penultimo.getIm()));
         Number risultato = new Number(risultatoRe, risultatoIm);
 
         stack.push(risultato);
@@ -83,8 +83,8 @@ public class Operations {
             throw new DivisionZeroException("\nImpossibile dividere per zero");
         }
 
-        double risultatoRe = ((a * c) + (b * d)) / ((c * c) + (d * d));
-        double risultatoIm = ((b * c) - (a * d)) / ((c * c) + (d * d));
+        double risultatoRe = this.round(((a * c) + (b * d)) / ((c * c) + (d * d)));
+        double risultatoIm = this.round(((b * c) - (a * d)) / ((c * c) + (d * d)));
         Number risultato = new Number(risultatoRe, risultatoIm);
         stack.push(risultato);
 
@@ -98,11 +98,11 @@ public class Operations {
 
             if (val.getRe() >= 0) { //se è maggiore di zero eseguo la radice classica
 
-                val.setRe(Math.sqrt((val.getRe())));
+                val.setRe(this.round(Math.sqrt((val.getRe()))));
 
             } else {
 
-                val.setIm(Math.sqrt((-1 * val.getRe()))); //se è minore di zero eseguo la radice del valore trasformato in positivo
+                val.setIm(this.round(Math.sqrt((-1 * val.getRe())))); //se è minore di zero eseguo la radice del valore trasformato in positivo
 
                 val.setRe(0);             //e lo inserisco come valore immaginario e setto la parte reale a 0
 
@@ -110,11 +110,11 @@ public class Operations {
 
         } else {
 
-            double abs = Math.sqrt(val.getRe() * val.getRe() + val.getIm() * val.getIm());   //calcolo modulo e fase
-            double arg = (2 * Math.PI + Math.atan2(val.getIm(), val.getRe())) % (2 * Math.PI);
+            double abs = this.round(Math.sqrt(val.getRe() * val.getRe() + val.getIm() * val.getIm()));   //calcolo modulo e fase
+            double arg = this.round((2 * Math.PI + Math.atan2(val.getIm(), val.getRe())) % (2 * Math.PI));
 
-            val.setRe(Math.sqrt(abs) * (Math.cos((arg / 2))));        //calcolo i valori reali e immaginari e li inserisco nell'oggetto val
-            val.setIm(Math.sqrt(abs) * (Math.sin(arg / 2)));
+            val.setRe(this.round(Math.sqrt(abs) * (Math.cos((arg / 2)))));        //calcolo i valori reali e immaginari e li inserisco nell'oggetto val
+            val.setIm(this.round(Math.sqrt(abs) * (Math.sin(arg / 2))));
 
         }
 
@@ -132,7 +132,14 @@ public class Operations {
         val.setRe(val.getRe() * -1);
 
         stack.push(val);
+    }
 
+    
+        private static double round(double value) {
+
+        BigDecimal bd = new BigDecimal(Double.toString(value));
+        bd = bd.setScale(4, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
 }
