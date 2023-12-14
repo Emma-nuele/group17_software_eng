@@ -245,16 +245,19 @@ public class CalculatorViewController implements Initializable {
         if (complexNumInProgress.equals("j")){
             try {
                 stack.push(new Number(0,1));
+                calcArea.setText("");
+                updateDisplay();
             } catch (FullStackException e) {
             calcArea.setText("Errore: " + e.getMessage());
             complexNumInProgress = ""; 
             }
         }
-        if(complexNumInProgress.equals("+")){
+        else if(complexNumInProgress.equals("+")){
             
             try{
                 
                     operations.sum();
+                    calcArea.setText("");
                     updateDisplay();
                     
             }catch (InsuffElemStackException | FullStackException e) {
@@ -265,6 +268,7 @@ public class CalculatorViewController implements Initializable {
             try {
                 
                     operations.sub();
+                    calcArea.setText("");
                     updateDisplay();
                     
             } catch (InsuffElemStackException | FullStackException e) {
