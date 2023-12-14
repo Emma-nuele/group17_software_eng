@@ -7,10 +7,13 @@ package calculator.developed;
 
 import calculator.exceptions.*;
 
+
 import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -61,9 +64,9 @@ public class CalculatorViewController implements Initializable {
         Character startLetter = 'a';
         Character endLetter = 'z';
         for (Character letter = startLetter; letter <= endLetter; letter++) {
-            if(letter != 'j'){
+            
                 ComboBoxVariables.getItems().add(letter);
-            }
+            
         }
         
         stack = new StackCalc();
@@ -88,6 +91,7 @@ public class CalculatorViewController implements Initializable {
                 updateDisplay();
             } catch (FullStackException| InsuffElemStackException e) {
                 calcArea.setText("Errore: " + e.getMessage());
+                complexNumInProgress = ""; 
             }
     }
 
@@ -99,6 +103,7 @@ public class CalculatorViewController implements Initializable {
                 updateDisplay();
             } catch (FullStackException | InsuffElemStackException e) {
                 calcArea.setText("Errore: " + e.getMessage());
+                complexNumInProgress = ""; 
             }
     }
 
@@ -110,6 +115,7 @@ public class CalculatorViewController implements Initializable {
             StackList.getItems().clear(); // Rimuovi elem da ListView (getItems() -> prende tutti oggetti dalla lista)
             }catch(InsuffElemStackException e){
                 calcArea.setText("Errore: " + e.getMessage());
+                complexNumInProgress = ""; 
             }
             complexNumInProgress = ""; // reset stringa in composizione
 
@@ -127,6 +133,7 @@ public class CalculatorViewController implements Initializable {
                 updateDisplay();
             } catch (InsuffElemStackException e) {
                 calcArea.setText("Errore: " + e.getMessage());
+                complexNumInProgress = ""; 
             }
         
     }
@@ -139,6 +146,7 @@ public class CalculatorViewController implements Initializable {
                 updateDisplay();
             } catch (FullStackException |InsuffElemStackException e) {
                 calcArea.setText("Errore: " + e.getMessage());
+                complexNumInProgress = ""; 
             }
         
     }
@@ -162,7 +170,7 @@ public class CalculatorViewController implements Initializable {
 
     @FXML
     private void delete(ActionEvent event){
-        calcArea.setText(    complexNumInProgress=complexNumInProgress.substring(0, complexNumInProgress.length() - 1));
+        calcArea.setText(complexNumInProgress=complexNumInProgress.substring(0, complexNumInProgress.length() - 1));
     }
  
 
@@ -185,6 +193,7 @@ public class CalculatorViewController implements Initializable {
                 
         } catch (InsuffElemStackException | FullStackException | DivisionZeroException e) {
             System.out.println(e.getMessage());
+            complexNumInProgress = ""; 
         }
     }
 
@@ -195,6 +204,7 @@ public class CalculatorViewController implements Initializable {
                 updateDisplay();
         } catch (InsuffElemStackException | FullStackException e) {
             calcArea.setText("Errore" + e.getMessage());
+            complexNumInProgress = ""; 
         }
     }
 
@@ -206,6 +216,7 @@ public class CalculatorViewController implements Initializable {
                 
             } catch (InsuffElemStackException | FullStackException e) {
                 calcArea.setText("Errore" + e.getMessage());
+                complexNumInProgress = ""; 
             }
         
     
@@ -222,6 +233,7 @@ public class CalculatorViewController implements Initializable {
                 
             } catch (InsuffElemStackException | FullStackException e) {
                 calcArea.setText("Errore" + e.getMessage());
+                complexNumInProgress = ""; 
             } 
         
     }
@@ -229,7 +241,15 @@ public class CalculatorViewController implements Initializable {
     //prob sbaglia stampa signReverse
     @FXML
     private void push(ActionEvent event) {
-        // TODO
+        
+        if (complexNumInProgress.equals("j")){
+            try {
+                stack.push(new Number(0,1));
+            } catch (FullStackException e) {
+            calcArea.setText("Errore: " + e.getMessage());
+            complexNumInProgress = ""; 
+            }
+        }
         if(complexNumInProgress.equals("+")){
             
             try{
@@ -239,7 +259,8 @@ public class CalculatorViewController implements Initializable {
                     
             }catch (InsuffElemStackException | FullStackException e) {
                 calcArea.setText("Errore: " + e.getMessage());
-            }   
+                complexNumInProgress = ""; 
+            }  
         }else if(complexNumInProgress.equals("-")){
             try {
                 
@@ -247,7 +268,8 @@ public class CalculatorViewController implements Initializable {
                     updateDisplay();
                     
             } catch (InsuffElemStackException | FullStackException e) {
-            calcArea.setText("Errore: " + e.getMessage());
+                calcArea.setText("Errore: " + e.getMessage());
+                complexNumInProgress = ""; 
             }
         }else{
             try{
@@ -290,14 +312,16 @@ public class CalculatorViewController implements Initializable {
                 complexNumInProgress = "";
                 calcArea.setText("");
                 updateDisplay();
-            }catch(FullStackException e){
+            }catch(Exception e){
                 calcArea.setText("Errore: " + e.getMessage());
+                complexNumInProgress = ""; 
             }
     }
     }
 
 
     private void updateDisplay() { 
+        complexNumInProgress = ""; 
         StackList.getItems().clear();
         for (Number item : stack.getStack()) {
             StackList.getItems().add(0, item.toString());
