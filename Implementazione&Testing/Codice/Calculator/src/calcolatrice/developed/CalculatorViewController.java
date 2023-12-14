@@ -25,7 +25,7 @@ import javafx.scene.control.ListView;
 
 /**
  *
- * @author cater
+ * @author manu
  */
 public class CalculatorViewController implements Initializable {
 
@@ -312,6 +312,7 @@ public class CalculatorViewController implements Initializable {
         variables.stackToVar(ComboBoxVariables.getValue());
         updateDisplay();
         handleComboBoxAction();
+        calcArea.setText("");
         }catch(InsuffElemStackException| InvalidArgException e){
             calcArea.setText("Errore: " + e.getMessage());
         }
@@ -324,6 +325,7 @@ public class CalculatorViewController implements Initializable {
         variables.varToStack(ComboBoxVariables.getValue());
         updateDisplay();
         handleComboBoxAction();
+        calcArea.setText("");
         }catch(FullStackException| InvalidArgException e){
             calcArea.setText("Errore: " + e.getMessage());
         }
@@ -337,6 +339,7 @@ public class CalculatorViewController implements Initializable {
         variables.addToVar(ComboBoxVariables.getValue());
         updateDisplay();    
         handleComboBoxAction();
+        calcArea.setText("");
         }catch( FullStackException| InsuffElemStackException| InvalidArgException e){
             calcArea.setText("Errore: " + e.getMessage());
         }
@@ -363,9 +366,11 @@ public class CalculatorViewController implements Initializable {
         variables.subToVar(ComboBoxVariables.getValue());
         updateDisplay(); 
         handleComboBoxAction();
+        calcArea.setText("");
         }catch(FullStackException | InsuffElemStackException | InvalidArgException e){
             calcArea.setText("Errore: " + e.getMessage());
         }
+        
     }
 
     
