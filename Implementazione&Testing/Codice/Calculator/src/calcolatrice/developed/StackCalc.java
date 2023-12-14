@@ -7,7 +7,7 @@ package calculator.developed;
 
 /**
  *
- * @author cater
+ * @author manu
  */
 import calculator.exceptions.*;
 import java.util.ArrayDeque;
@@ -34,21 +34,21 @@ public class StackCalc {
 
     public Number pop () throws InsuffElemStackException{
         if(!leastOne())
-            throw new InsuffElemStackException("\nImpossibile eseguire comando, non ci sono elementi nello stack");
+            throw new InsuffElemStackException("Non ci sono elementi nello stack");
         else
             return stack.pollLast();
     }
 
     public void push(Number n) throws FullStackException{
         if(isFull())
-            throw new FullStackException("\nImpossibile aggiungere elemento, lo stack è pieno");
+            throw new FullStackException("Lo stack è pieno");
         else
             stack.addLast(n);
     }
 
     public Number top() throws InsuffElemStackException{
         if(!leastOne())
-            throw new InsuffElemStackException("\nNon ci sono elementi nello stack");
+            throw new InsuffElemStackException("Non ci sono elementi nello stack");
         else
             return stack.getLast();
     }
