@@ -7,6 +7,8 @@ package calculator.developed;
 
 
 import calculator.exceptions.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Operations {
 
