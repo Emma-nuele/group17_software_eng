@@ -313,7 +313,7 @@ public class CalculatorViewController implements Initializable {
         updateDisplay();
         handleComboBoxAction();
         calcArea.setText("");
-        }catch(InsuffElemStackException| InvalidArgException e){
+        }catch(InsuffElemStackException| InvalidArgException  e){
             calcArea.setText("Errore: " + e.getMessage());
         }
     }
@@ -326,7 +326,7 @@ public class CalculatorViewController implements Initializable {
         updateDisplay();
         handleComboBoxAction();
         calcArea.setText("");
-        }catch(FullStackException| InvalidArgException e){
+        }catch(FullStackException| InvalidArgException |UnusedVarException e){
             calcArea.setText("Errore: " + e.getMessage());
         }
 
@@ -340,7 +340,7 @@ public class CalculatorViewController implements Initializable {
         updateDisplay();    
         handleComboBoxAction();
         calcArea.setText("");
-        }catch( FullStackException| InsuffElemStackException| InvalidArgException e){
+        }catch( FullStackException| InsuffElemStackException| InvalidArgException|UnusedVarException e){
             calcArea.setText("Errore: " + e.getMessage());
         }
     }
@@ -367,7 +367,7 @@ public class CalculatorViewController implements Initializable {
         updateDisplay(); 
         handleComboBoxAction();
         calcArea.setText("");
-        }catch(FullStackException | InsuffElemStackException | InvalidArgException e){
+        }catch(FullStackException | InsuffElemStackException | InvalidArgException|UnusedVarException e){
             calcArea.setText("Errore: " + e.getMessage());
         }
         
