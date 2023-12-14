@@ -1,17 +1,17 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-package calcolatrice.developed;
-
-import calcolatrice.developed.StackCalc;
-import calcolatrice.exceptions.*;
-import java.util.HashMap;
+package calculator.developed;
 
 /**
  *
- * @author Daniele
+ * @author manu
  */
+import calculator.exceptions.*;
+import java.util.HashMap;
+
 public class Variables {
     private StackCalc stack;
     private HashMap <Character, Number> map;
@@ -21,28 +21,45 @@ public class Variables {
         this.map=new HashMap <>();
     }
 
-    public void stackToVar(Character var) throws InsuffElemStackException{
+    public HashMap getMap(){
+        return this.map;
+    }
+    
+    public void stackToVar(Character var) throws InsuffElemStackException, InvalidArgException{
+        
+        if(var == null)
+            throw new InvalidArgException("Seleziona prima una variabile");
         map.put(var, stack.pop());
     }
 
-    public void varToStack(Character var) throws FullStackException{
+    public void varToStack(Character var) throws FullStackException, InvalidArgException{
+        
+        if(var == null)
+            throw new InvalidArgException("Seleziona prima una variabile");
         stack.push(map.get(var));
     }
 
-    public void addToVar(Character var)throws FullStackException,InsuffElemStackException{
+    public void addToVar(Character var)throws FullStackException,InsuffElemStackException, InvalidArgException{
+        
         
         Number ultimo = map.get(var);
         Number incremento = stack.pop();
+        
+        if(var == null)
+            throw new InvalidArgException("Seleziona prima una variabile");
         
         Number risultato = new Number( ultimo.getRe() + incremento.getRe(), ultimo.getIm() + incremento.getIm());
        
         map.put(var, risultato);
     }
  
-    public void subToVar(Character var)throws FullStackException,InsuffElemStackException{
+    public void subToVar(Character var)throws FullStackException,InsuffElemStackException, InvalidArgException{
         
         Number ultimo = map.get(var);
         Number decremento = stack.pop();
+        
+        if(var == null)
+            throw new InvalidArgException("Seleziona prima una variabile");
         
         Number risultato = new Number( ultimo.getRe() - decremento.getRe(), ultimo.getIm() - decremento.getIm());
        
