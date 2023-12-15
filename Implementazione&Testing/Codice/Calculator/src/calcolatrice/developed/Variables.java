@@ -85,9 +85,9 @@ public class Variables {
         return map.get(c); 
     }
     
-    public Number setVariables(Character c, Number n){
+    public void setVariables(Character c, Number n){
         
         map.put(c, n); 
-        return map.get(c); 
+       
     }
 }
