@@ -191,6 +191,7 @@ public class CalculatorViewController implements Initializable {
                 updateDisplay();
                 
         } catch (InsuffElemStackException | FullStackException | DivisionZeroException e) {
+            updateDisplay();
             calcArea.setText("Errore: " + e.getMessage());
             complexNumInProgress = ""; 
         }
