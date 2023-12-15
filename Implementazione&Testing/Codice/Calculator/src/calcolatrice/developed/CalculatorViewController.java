@@ -167,7 +167,7 @@ public class CalculatorViewController implements Initializable {
     @FXML
     private void delete(ActionEvent event){
         
-        if(!calcArea.getText().isEmpty())
+        if(!complexNumInProgress.equals(""))
         calcArea.setText(complexNumInProgress=complexNumInProgress.substring(0, complexNumInProgress.length() - 1));
         
     }
