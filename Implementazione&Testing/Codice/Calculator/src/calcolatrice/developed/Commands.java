@@ -7,7 +7,7 @@ package calculator.developed;
 
 /**
  *
- * @author manu
+ * @author cater
  */
 import calculator.exceptions.FullStackException;
 import calculator.exceptions.InsuffElemStackException;
@@ -22,7 +22,7 @@ public class Commands {
     public void swap()throws InsuffElemStackException,FullStackException{ //inverte pos ultimi due elem
         
         if(!stack.leastTwo())
-            throw new InsuffElemStackException("Non ci sono abbasatnza elementi nello stack");
+            throw new InsuffElemStackException("Non ci sono abbastanza elementi nello stack");
         
         Number val1 = stack.pop();
         Number val2 = stack.pop();
@@ -34,7 +34,7 @@ public class Commands {
     public void over() throws InsuffElemStackException,FullStackException{ //push copia penultimo elem
         
         if(!stack.leastTwo())
-            throw new InsuffElemStackException("Non ci sono abbasatnza elementi nello stack");
+            throw new InsuffElemStackException("Non ci sono abbastanza elementi nello stack");
         
         Number ultimo = stack.pop();
         Number penultimo = stack.top();
