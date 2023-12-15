@@ -38,14 +38,14 @@ public class CalculatorViewController implements Initializable {
     private Variables variables;
     private Commands commands;
 
-    private String complexNumInProgress = ""; // variabile tiene traccia num complesso utente compone
+    private String complexNumInProgress = "";
 
     @FXML
     private ListView<String> StackList;
     @FXML
     private TextArea calcArea;
     @FXML
-    private ListView<String> VariableList; //Aggiunta - (fxid già impostato)
+    private ListView<String> VariableList; 
     @FXML
     private Button DropButton, DupButton, SwapButton, OverButton, ClearButton, EnterButton;
     @FXML
@@ -56,7 +56,7 @@ public class CalculatorViewController implements Initializable {
     @FXML
     private ComboBox<Character> ComboBoxVariables;
 
-    @Override //Aggiunta
+    @Override 
     public void initialize(URL url, ResourceBundle rb) {
         
         ObservableList<Character> letterList = FXCollections.observableArrayList();
@@ -75,12 +75,12 @@ public class CalculatorViewController implements Initializable {
         variables = new Variables(stack);
         commands = new Commands(stack);
 
-        StackList.getItems().clear(); //Cancella per sicurezza
+        StackList.getItems().clear(); 
 
     }
 
     @FXML
-    private void quitApp(ActionEvent event) { //Da fare su scene builder
+    private void quitApp(ActionEvent event) { 
         Platform.exit();
     }
     
@@ -113,15 +113,15 @@ public class CalculatorViewController implements Initializable {
             
             try{
             commands.clear();
-            StackList.getItems().clear(); // Rimuovi elem da ListView (getItems() -> prende tutti oggetti dalla lista)
+            StackList.getItems().clear(); 
             }catch(InsuffElemStackException e){
                 calcArea.setText("Errore: " + e.getMessage());
                 complexNumInProgress = ""; 
             }
-            complexNumInProgress = ""; // reset stringa in composizione
+            complexNumInProgress = ""; 
 
-            if (calcArea != null) { // Aggiorna calcArea
-                calcArea.setText(""); //reset
+            if (calcArea != null) { 
+                calcArea.setText(""); 
             }
         
     }
@@ -152,15 +152,12 @@ public class CalculatorViewController implements Initializable {
         
     }
 
-    // Da completare
-    //cancellare (tornare di un digit indietro)
     @FXML
     private void handleInput(ActionEvent event) {
         
             Button buttonClicked = (Button) event.getSource();
             String inputText = buttonClicked.getText();
 
-            // Concatena l'input
             complexNumInProgress += inputText;
 
             if (calcArea != null) {
@@ -226,7 +223,6 @@ public class CalculatorViewController implements Initializable {
     
         }
 
-    //non funziona
     @FXML
     private void signReversal(ActionEvent event) {
         
@@ -242,11 +238,9 @@ public class CalculatorViewController implements Initializable {
         
     }
 
-    //prob sbaglia stampa signReverse
     @FXML
     private void push(ActionEvent event) {
         if ( complexNumInProgress.charAt(0) == '+' && isDigit(complexNumInProgress.charAt(1))) {
-            // Rimuove il primo carattere
             complexNumInProgress = complexNumInProgress.substring(1);
         }
         
@@ -300,36 +294,36 @@ public class CalculatorViewController implements Initializable {
             try{
                 String number[], num = "";
                 double real, complex;
-                if (complexNumInProgress.contains("+")) { //verifico se il numero complesso contiene il +
-                    complexNumInProgress = complexNumInProgress.replace("j", ""); //se è presente la j la rimuovo
+                if (complexNumInProgress.contains("+")) { 
+                    complexNumInProgress = complexNumInProgress.replace("j", ""); 
                     number = complexNumInProgress.split(Pattern.quote("+"));
                     real = Double.parseDouble(number[0]);
                     complex = Double.parseDouble(number[1]);
-                } else if (complexNumInProgress.contains("-")) { //verifico se il numero complesso o il numero reale contiene un meno
-                    if(complexNumInProgress.startsWith("-")) { //verifico se il valore inizia con - 
-                        complexNumInProgress = complexNumInProgress.substring(1); //prendo solo la sottostringa senza il -
+                } else if (complexNumInProgress.contains("-")) { 
+                    if(complexNumInProgress.startsWith("-")) {
+                        complexNumInProgress = complexNumInProgress.substring(1); 
                         num = "-";
                     }
-                    if(!complexNumInProgress.contains("-")) {//verifico se il numero complesso presenta un ulteriore -
-                        if (complexNumInProgress.contains("j")) {//se non c'è il -, verifico se il numero è complesso (contiene j)
-                            complexNumInProgress = complexNumInProgress.replace("j", "");//tolgo la j
+                    if(!complexNumInProgress.contains("-")) {
+                        if (complexNumInProgress.contains("j")) {
+                            complexNumInProgress = complexNumInProgress.replace("j", "");
                             real = 0;
-                            complex = Double.parseDouble(num.concat(complexNumInProgress));//concateno il valore con num in modo tale che se il numero era negativo allora rimetto il - altrimenti concateno con uno spazio vuoto
-                        } else {//altrimenti il numero è un numero reale negativo
+                            complex = Double.parseDouble(num.concat(complexNumInProgress));
+                        } else {
                             real = Double.parseDouble(num.concat(complexNumInProgress));
                             complex = 0;
                         }
-                    }else {//è un numero complesso con parte immaginaria negativa
+                    }else {
                         complexNumInProgress = complexNumInProgress.replace("j", "");
                         number = complexNumInProgress.split("-");
                         real = Double.parseDouble(num.concat(number[0]));
                         complex = Double.parseDouble("-".concat(number[1]));
                     }
-                } else if (complexNumInProgress.contains("j")) { //verifico se il numero inserito contiene j, in questo caso ho un numero complesso senza parte reale
+                } else if (complexNumInProgress.contains("j")) { 
                     complexNumInProgress = complexNumInProgress.replace("j", "");
                     real = 0;
                     complex = Double.parseDouble(complexNumInProgress);
-                } else {//verifico che il valore sia un numero reale senza parte immaginaria
+                } else {
                     real = Double.parseDouble(complexNumInProgress);
                     complex = 0;
                 }
@@ -356,7 +350,6 @@ public class CalculatorViewController implements Initializable {
 
     @FXML
     private void stackToVar(ActionEvent event) {
-        // Logica per trasferire dallo stack alla variabile
         try{
         variables.stackToVar(ComboBoxVariables.getValue());
         updateDisplay();
@@ -369,7 +362,6 @@ public class CalculatorViewController implements Initializable {
 
     @FXML
     private void varToStack(ActionEvent event) {
-        // Logica per trasferire dalla variabile allo stack
         try{
         variables.varToStack(ComboBoxVariables.getValue());
         updateDisplay();
@@ -383,7 +375,6 @@ public class CalculatorViewController implements Initializable {
 
     @FXML
     private void addToVar(ActionEvent event)  {
-        // Logica per aggiungere al valore della variabile
         try{
         variables.addToVar(ComboBoxVariables.getValue());
         updateDisplay();    
@@ -398,7 +389,6 @@ public class CalculatorViewController implements Initializable {
     private void handleComboBoxAction() {
         
         VariableList.getItems().clear();
-        //List<String> list = new ArrayList<>(variables.getMap().keySet());
   
         Iterator<Map.Entry<Character,Number>> iterator = variables.getMap().entrySet().iterator();
         while(iterator.hasNext()){
@@ -410,7 +400,6 @@ public class CalculatorViewController implements Initializable {
 
     @FXML
     private void subToVar(ActionEvent event) {
-        // Logica per sottrarre dal valore della variabile
         try{
         variables.subToVar(ComboBoxVariables.getValue());
         updateDisplay(); 
