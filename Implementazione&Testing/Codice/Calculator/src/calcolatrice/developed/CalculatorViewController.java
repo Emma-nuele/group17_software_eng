@@ -251,7 +251,20 @@ public class CalculatorViewController implements Initializable {
             calcArea.setText("Errore: " + e.getMessage());
             complexNumInProgress = ""; 
             }
+        
         }
+        else if (complexNumInProgress.equals("-j")){
+            try {
+                stack.push(new Number(0,-1));
+                calcArea.setText("");
+                updateDisplay();
+            } catch (FullStackException e) {
+            calcArea.setText("Errore: " + e.getMessage());
+            complexNumInProgress = ""; 
+            }
+        
+        }
+        
         else if(complexNumInProgress.equals("+")){
             
             try{
