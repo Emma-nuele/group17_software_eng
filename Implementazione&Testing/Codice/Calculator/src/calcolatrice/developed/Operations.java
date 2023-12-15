@@ -38,7 +38,7 @@ public class Operations {
     public void sub() throws InsuffElemStackException, FullStackException {
 
         if (!stack.leastTwo()) {
-            throw new InsuffElemStackException("Non ci sono abbasatnza elementi nello stack");
+            throw new InsuffElemStackException("Non ci sono abbastanza elementi nello stack");
         }
 
         Number ultimo = stack.pop();
@@ -53,7 +53,7 @@ public class Operations {
     public void multiplication() throws InsuffElemStackException, FullStackException {
 
         if (!stack.leastTwo()) {
-            throw new InsuffElemStackException("Non ci sono abbasatnza elementi nello stack");
+            throw new InsuffElemStackException("Non ci sono abbastanza elementi nello stack");
         }
 
         Number ultimo = stack.pop();
@@ -70,7 +70,7 @@ public class Operations {
     public void division() throws DivisionZeroException, InsuffElemStackException, FullStackException {
 
         if (!stack.leastTwo()) {
-            throw new InsuffElemStackException("Non ci sono abbasatnza elementi nello stack");
+            throw new InsuffElemStackException("Non ci sono abbastanza elementi nello stack");
         }
 
         Number ultimo = stack.pop();
