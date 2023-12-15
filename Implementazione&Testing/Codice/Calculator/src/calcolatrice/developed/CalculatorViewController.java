@@ -206,7 +206,7 @@ public class CalculatorViewController implements Initializable {
                 operations.multiplication();
                 updateDisplay();
         } catch (InsuffElemStackException | FullStackException e) {
-            calcArea.setText("Errore" + e.getMessage());
+            calcArea.setText("Errore: " + e.getMessage());
             complexNumInProgress = ""; 
         }
     }
@@ -218,7 +218,7 @@ public class CalculatorViewController implements Initializable {
                     updateDisplay();
                 
             } catch (InsuffElemStackException | FullStackException e) {
-                calcArea.setText("Errore" + e.getMessage());
+                calcArea.setText("Errore: " + e.getMessage());
                 complexNumInProgress = ""; 
             }
         
@@ -235,7 +235,7 @@ public class CalculatorViewController implements Initializable {
                     updateDisplay();
                 
             } catch (InsuffElemStackException | FullStackException e) {
-                calcArea.setText("Errore" + e.getMessage());
+                calcArea.setText("Errore: " + e.getMessage());
                 complexNumInProgress = ""; 
             } 
         
