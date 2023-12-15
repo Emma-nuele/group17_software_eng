@@ -244,10 +244,9 @@ public class CalculatorViewController implements Initializable {
     //prob sbaglia stampa signReverse
     @FXML
     private void push(ActionEvent event) {
-        if (complexNumInProgress.length() > 1 && complexNumInProgress.charAt(0) == '+') {
+        if ( complexNumInProgress.charAt(0) == '+' && isDigit(complexNumInProgress.charAt(1))) {
             // Rimuove il primo carattere
             complexNumInProgress = complexNumInProgress.substring(1);
-            
         }
         
         if (complexNumInProgress.equals("j")){
