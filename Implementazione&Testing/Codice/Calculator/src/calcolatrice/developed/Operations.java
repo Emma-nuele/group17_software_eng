@@ -82,6 +82,7 @@ public class Operations {
         double d = ultimo.getIm();
 
         if ((c == 0 && d == 0)) {
+            stack.push(penultimo);
             throw new DivisionZeroException("Impossibile dividere per zero");
         }
 
