@@ -241,6 +241,10 @@ public class CalculatorViewController implements Initializable {
     //prob sbaglia stampa signReverse
     @FXML
     private void push(ActionEvent event) {
+        if (complexNumInProgress.length() > 1 && complexNumInProgress.charAt(0) == '+') {
+            // Rimuove il primo carattere
+            complexNumInProgress = complexNumInProgress.substring(1);
+        }
         
         if (complexNumInProgress.equals("j")){
             try {
@@ -410,10 +414,7 @@ public class CalculatorViewController implements Initializable {
         calcArea.setText("");
         }catch(FullStackException | InsuffElemStackException | InvalidArgException|UnusedVarException e){
             calcArea.setText("Errore: " + e.getMessage());
-        }
-        
+        }        
     }
-
-    
-    }
+}
     
