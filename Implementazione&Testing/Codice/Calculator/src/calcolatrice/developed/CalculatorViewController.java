@@ -7,6 +7,7 @@ package calculator.developed;
 
 import calculator.exceptions.*;
 import static java.lang.Character.isDigit;
+import static java.lang.Character.isLetter;
 
 
 import java.net.URL;
@@ -185,56 +186,22 @@ public class CalculatorViewController implements Initializable {
 
     @FXML
     private void division(ActionEvent event) {
-        try {
-            
-                operations.division();
-                updateDisplay();
-                
-        } catch (InsuffElemStackException | FullStackException | DivisionZeroException e) {
-            
-            calcArea.setText("Errore: " + e.getMessage());
-            complexNumInProgress = ""; 
-        }
+        calcArea.setText(complexNumInProgress += "/");
     }
 
     @FXML
     private void multiplication(ActionEvent event) {
-        try {
-                operations.multiplication();
-                updateDisplay();
-        } catch (InsuffElemStackException | FullStackException e) {
-            calcArea.setText("Errore: " + e.getMessage());
-            complexNumInProgress = ""; 
-        }
+        calcArea.setText(complexNumInProgress += "*");
     }
 
     @FXML
     private void sqrt(ActionEvent event) {
-            try {
-                    operations.sqrt();
-                    updateDisplay();
-                
-            } catch (InsuffElemStackException | FullStackException e) {
-                calcArea.setText("Errore: " + e.getMessage());
-                complexNumInProgress = ""; 
-            }
-        
-    
+            calcArea.setText(complexNumInProgress += "√");
         }
 
     @FXML
     private void signReversal(ActionEvent event) {
-        
-            try {
-                
-                    operations.signReversal();
-                    updateDisplay();
-                
-            } catch (InsuffElemStackException | FullStackException e) {
-                calcArea.setText("Errore: " + e.getMessage());
-                complexNumInProgress = ""; 
-            } 
-        
+        calcArea.setText(complexNumInProgress += "±");
     }
 
     @FXML
@@ -262,33 +229,107 @@ public class CalculatorViewController implements Initializable {
             } catch (FullStackException e) {
                 calcArea.setText("Errore: " + e.getMessage());
                 complexNumInProgress = ""; 
+            } 
+        }else if((complexNumInProgress.length()==1 && (!isLetter(complexNumInProgress.charAt(0))) && (!isDigit(complexNumInProgress.charAt(0)))) || (complexNumInProgress.length()>1 && (!isLetter(complexNumInProgress.charAt(0))) && (!isDigit(complexNumInProgress.charAt(0)))&&(!isLetter(complexNumInProgress.charAt(1))) && (!isDigit(complexNumInProgress.charAt(1))))){
+            int flag=1;
+            for(int i=1; i<complexNumInProgress.length(); i++){
+                if((!isLetter(complexNumInProgress.charAt(i))) && (!isDigit(complexNumInProgress.charAt(i))))
+                    flag++;
             }
-        
-        }
-        
-        else if(complexNumInProgress.equals("+")){
+            if(flag==complexNumInProgress.length()){
+                int counter=1;
+                for(int i=0; i<complexNumInProgress.length(); i++){
+                    switch (complexNumInProgress.charAt(i)) {
+                        case '+':
+                            counter++;
+                        break;
+                        case '-':
+                            counter++;
+                        break;
+                        case '/':
+                            counter++;
+                        break;
+                        case '*':
+                            counter++;
+                        break;
+                        default:
+                    }    
+                }
             
-            try{
-                
-                    operations.sum();
-                    calcArea.setText("");
-                    updateDisplay();
-                    
-            }catch (InsuffElemStackException | FullStackException e) {
-                calcArea.setText("Errore: " + e.getMessage());
-                complexNumInProgress = ""; 
-            }  
-        }else if(complexNumInProgress.equals("-")){
-            try {
-                
-                    operations.sub();
-                    calcArea.setText("");
-                    updateDisplay();
-                    
-            } catch (InsuffElemStackException | FullStackException e) {
-                calcArea.setText("Errore: " + e.getMessage());
-                complexNumInProgress = ""; 
+                if(counter <= stack.getStack().size()){
+                    for(int i=0; i<complexNumInProgress.length(); i++){
+                    switch (complexNumInProgress.charAt(i)) {
+                        case '+':
+                            try{
+                                    operations.sum();
+                                    calcArea.setText("");
+                                    updateDisplay();  
+                            }catch (InsuffElemStackException | FullStackException e) {
+                                calcArea.setText("Errore: " + e.getMessage());
+                                complexNumInProgress = ""; 
+                            }  
+                        break;
+                        case '-':
+                            try {
+                                    operations.sub();
+                                    calcArea.setText("");
+                                    updateDisplay();
+                            } catch (InsuffElemStackException | FullStackException e) {
+                                calcArea.setText("Errore: " + e.getMessage());
+                                complexNumInProgress = ""; 
+                            }
+
+                        break;
+                        case '/':
+                            try {
+                                    operations.division();
+                                    updateDisplay();
+                            } catch (InsuffElemStackException | FullStackException | DivisionZeroException e) {
+
+                                calcArea.setText("Errore: " + e.getMessage());
+                                complexNumInProgress = ""; 
+                            }
+                        break;
+                        case '*':
+                            try {
+                                    operations.multiplication();
+                                    updateDisplay();
+                            } catch (InsuffElemStackException | FullStackException e) {
+                                calcArea.setText("Errore: " + e.getMessage());
+                                complexNumInProgress = ""; 
+                            }
+                        break;
+                        case '√':
+                            try {
+                                    operations.sqrt();
+                                    updateDisplay();
+                            } catch (InsuffElemStackException | FullStackException e) {
+                                calcArea.setText("Errore: " + e.getMessage());
+                                complexNumInProgress = ""; 
+                            }
+                        break;
+                        case '±':
+                            try {
+                                    operations.signReversal();
+                                    updateDisplay();        
+                            } catch (InsuffElemStackException | FullStackException e) {
+                                calcArea.setText("Errore: " + e.getMessage());
+                                complexNumInProgress = ""; 
+                            } 
+                        break;
+                    }
+                }
+                    complexNumInProgress = ""; 
+            }else{
+                    calcArea.setText("Errore: Non ci sono abbastanza elementi nello stack");
+                    complexNumInProgress = ""; 
+                }   
+            }else{
+                calcArea.setText("Errore: Formato non valido");
+                    complexNumInProgress = ""; 
             }
+                
+        
         }else{
             try{
                 String number[], num = "";
@@ -339,7 +380,6 @@ public class CalculatorViewController implements Initializable {
 
 
     private void updateDisplay() { 
-        complexNumInProgress = ""; 
         calcArea.setText("");
         StackList.getItems().clear();
         for (Number item : stack.getStack()) {
@@ -354,6 +394,7 @@ public class CalculatorViewController implements Initializable {
         variables.stackToVar(ComboBoxVariables.getValue());
         updateDisplay();
         handleComboBoxAction();
+        complexNumInProgress = ""; 
         }catch(InsuffElemStackException| InvalidArgException  e){
             calcArea.setText("Errore: " + e.getMessage());
         }
@@ -365,6 +406,7 @@ public class CalculatorViewController implements Initializable {
         variables.varToStack(ComboBoxVariables.getValue());
         updateDisplay();
         handleComboBoxAction();
+        complexNumInProgress = ""; 
         }catch(FullStackException| InvalidArgException |UnusedVarException e){
             calcArea.setText("Errore: " + e.getMessage());
         }
@@ -377,6 +419,7 @@ public class CalculatorViewController implements Initializable {
         variables.addToVar(ComboBoxVariables.getValue());
         updateDisplay();    
         handleComboBoxAction();
+        complexNumInProgress = ""; 
         }catch( FullStackException| InsuffElemStackException| InvalidArgException|UnusedVarException e){
             calcArea.setText("Errore: " + e.getMessage());
         }
@@ -401,6 +444,7 @@ public class CalculatorViewController implements Initializable {
         variables.subToVar(ComboBoxVariables.getValue());
         updateDisplay(); 
         handleComboBoxAction();
+        complexNumInProgress = ""; 
         }catch(FullStackException | InsuffElemStackException | InvalidArgException|UnusedVarException e){
             calcArea.setText("Errore: " + e.getMessage());
         }        
