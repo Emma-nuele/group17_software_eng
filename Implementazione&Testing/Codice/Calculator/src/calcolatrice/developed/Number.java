@@ -44,6 +44,17 @@ public class Number {
             posRe="+";
         return posRe + re + posIm + im + "j";
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj)
+            return true; 
+        if(obj==null || getClass() != obj.getClass())
+            return false; 
+        Number other = (Number) obj; 
+        return Double.compare(other.re, re) == 0 && Double.compare(other.im, im) ==0; 
+         
+    }
     
     
 }
