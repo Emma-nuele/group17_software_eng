@@ -238,7 +238,7 @@ public class CalculatorViewController implements Initializable {
 
     @FXML
     private void push(ActionEvent event) {
-        if ( complexNumInProgress.charAt(0) == '+' && isDigit(complexNumInProgress.charAt(1))) {
+        if (  complexNumInProgress.charAt(0) == '+' &&  complexNumInProgress.length() > 1 && isDigit(complexNumInProgress.charAt(1))) {
             complexNumInProgress = complexNumInProgress.substring(1);
         }
         
