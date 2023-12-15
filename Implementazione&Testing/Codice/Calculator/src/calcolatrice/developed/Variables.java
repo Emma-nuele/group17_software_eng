@@ -79,6 +79,15 @@ public class Variables {
         map.put(var, risultato);
         
     }
+
+
+    public Number getVariables(Character c){
+        return map.get(c); 
+    }
     
-   
+    public Number setVariables(Character c, Number n){
+        
+        map.put(c, n); 
+        return map.get(c); 
+    }
 }
