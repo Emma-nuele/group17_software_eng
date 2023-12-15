@@ -191,7 +191,7 @@ public class CalculatorViewController implements Initializable {
                 updateDisplay();
                 
         } catch (InsuffElemStackException | FullStackException | DivisionZeroException e) {
-            updateDisplay();
+            
             calcArea.setText("Errore: " + e.getMessage());
             complexNumInProgress = ""; 
         }
@@ -239,7 +239,7 @@ public class CalculatorViewController implements Initializable {
 
     @FXML
     private void push(ActionEvent event) {
-        if (  complexNumInProgress.charAt(0) == '+' &&  complexNumInProgress.length() > 1 && isDigit(complexNumInProgress.charAt(1))) {
+        if (  complexNumInProgress.length() > 1 && complexNumInProgress.charAt(0) == '+'  && isDigit(complexNumInProgress.charAt(1))) {
             complexNumInProgress = complexNumInProgress.substring(1);
         }
         
@@ -249,8 +249,8 @@ public class CalculatorViewController implements Initializable {
                 calcArea.setText("");
                 updateDisplay();
             } catch (FullStackException e) {
-            calcArea.setText("Errore: " + e.getMessage());
-            complexNumInProgress = ""; 
+                calcArea.setText("Errore: " + e.getMessage());
+                complexNumInProgress = ""; 
             }
         
         }
@@ -260,8 +260,8 @@ public class CalculatorViewController implements Initializable {
                 calcArea.setText("");
                 updateDisplay();
             } catch (FullStackException e) {
-            calcArea.setText("Errore: " + e.getMessage());
-            complexNumInProgress = ""; 
+                calcArea.setText("Errore: " + e.getMessage());
+                complexNumInProgress = ""; 
             }
         
         }
@@ -340,6 +340,7 @@ public class CalculatorViewController implements Initializable {
 
     private void updateDisplay() { 
         complexNumInProgress = ""; 
+        calcArea.setText("");
         StackList.getItems().clear();
         for (Number item : stack.getStack()) {
             StackList.getItems().add(0, item.toString());
@@ -353,7 +354,6 @@ public class CalculatorViewController implements Initializable {
         variables.stackToVar(ComboBoxVariables.getValue());
         updateDisplay();
         handleComboBoxAction();
-        calcArea.setText("");
         }catch(InsuffElemStackException| InvalidArgException  e){
             calcArea.setText("Errore: " + e.getMessage());
         }
@@ -365,7 +365,6 @@ public class CalculatorViewController implements Initializable {
         variables.varToStack(ComboBoxVariables.getValue());
         updateDisplay();
         handleComboBoxAction();
-        calcArea.setText("");
         }catch(FullStackException| InvalidArgException |UnusedVarException e){
             calcArea.setText("Errore: " + e.getMessage());
         }
@@ -378,7 +377,6 @@ public class CalculatorViewController implements Initializable {
         variables.addToVar(ComboBoxVariables.getValue());
         updateDisplay();    
         handleComboBoxAction();
-        calcArea.setText("");
         }catch( FullStackException| InsuffElemStackException| InvalidArgException|UnusedVarException e){
             calcArea.setText("Errore: " + e.getMessage());
         }
@@ -403,7 +401,6 @@ public class CalculatorViewController implements Initializable {
         variables.subToVar(ComboBoxVariables.getValue());
         updateDisplay(); 
         handleComboBoxAction();
-        calcArea.setText("");
         }catch(FullStackException | InsuffElemStackException | InvalidArgException|UnusedVarException e){
             calcArea.setText("Errore: " + e.getMessage());
         }        
