@@ -195,7 +195,7 @@ public class CalculatorViewController implements Initializable {
                 updateDisplay();
                 
         } catch (InsuffElemStackException | FullStackException | DivisionZeroException e) {
-            System.out.println(e.getMessage());
+            calcArea.setText("Errore: " + e.getMessage());
             complexNumInProgress = ""; 
         }
     }
@@ -247,6 +247,7 @@ public class CalculatorViewController implements Initializable {
         if (complexNumInProgress.length() > 1 && complexNumInProgress.charAt(0) == '+') {
             // Rimuove il primo carattere
             complexNumInProgress = complexNumInProgress.substring(1);
+            
         }
         
         if (complexNumInProgress.equals("j")){
