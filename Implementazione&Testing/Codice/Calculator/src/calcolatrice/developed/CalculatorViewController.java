@@ -6,6 +6,7 @@
 package calculator.developed;
 
 import calculator.exceptions.*;
+import static java.lang.Character.isDigit;
 
 
 import java.net.URL;
