@@ -1,4 +1,8 @@
 # group17_software_eng
+
+PRESENTAZIONE PPT: 
+https://1drv.ms/p/s!AmE_rIJC_-60qzgywpXUXnQ8FaVZ?e=1OXmU1
+
 AGGIORANRE ALLA FINE USE CASE DIAGRAM
 
 NOTAZIONI
